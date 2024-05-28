@@ -5,6 +5,7 @@ namespace App\Livewire\Admin\Actions;
 use Livewire\Component;
 use App\Livewire\Forms\Admin\FormUser;
 use App\Models\User;
+use Illuminate\Support\Facades\Request;
 
 class DeleteUser extends Component
 {
@@ -29,7 +30,7 @@ class DeleteUser extends Component
     {
         $this->form->destroy($user);
         $this->closeModal();
-        return redirect()->back();
+        return redirect(Request::url());
     }
 
 

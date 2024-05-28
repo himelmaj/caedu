@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Actions;
 
 use Livewire\Component;
 use App\Livewire\Forms\Admin\FormUser;
+use Illuminate\Support\Facades\Request;
 
 class AddUser extends Component
 {
@@ -28,7 +29,7 @@ class AddUser extends Component
         $this->form->store();
         $this->closeModal();
         
-        return redirect()->back();
+        return redirect(Request::url());
     }
 
     public function render()
