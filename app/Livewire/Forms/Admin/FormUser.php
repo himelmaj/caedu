@@ -51,14 +51,6 @@ class FormUser extends Form
         $this->reset();
     }
 
-    public function delete($id)
-    {
-        $user = User::findOrFail($id);
-        $user->delete();
-
-        $this->reset();
-    }
-
     public function update()
     {
         $this->validate();
@@ -79,5 +71,9 @@ class FormUser extends Form
         $this->reset();
     }
 
+    public function destroy(User $user)
+    {
+        $user->delete();
+    }
 
 }

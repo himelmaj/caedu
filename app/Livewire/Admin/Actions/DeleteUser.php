@@ -4,13 +4,14 @@ namespace App\Livewire\Admin\Actions;
 
 use Livewire\Component;
 use App\Livewire\Forms\Admin\FormUser;
+use App\Models\User;
 
 class DeleteUser extends Component
 {
 
     public $modal = false;
 
-    public $id;
+    public User $user;
 
     public function openModal()
     {
@@ -24,10 +25,11 @@ class DeleteUser extends Component
 
     public FormUser $form;
 
-    public function deleteUser($id)
+    public function delete(User $user)
     {
-        $this->form->delete($id);
-        return redirect()->route('admin.users');
+        $this->form->destroy($user);
+        $this->closeModal();
+        return redirect()->back();
     }
 
 

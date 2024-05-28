@@ -3,13 +3,13 @@
 namespace App\Livewire\Admin\Actions;
 
 use Livewire\Component;
-use App\Livewire\Forms\Admin\FormUser;
+use App\Livewire\Forms\Admin\FormRole;
 
-class AddUser extends Component
+class DeleteRole extends Component
 {
     public $modal = false;
 
-    public $roles =  ['admin', 'teacher', 'student'];
+    public $id;
 
     public function openModal()
     {
@@ -21,18 +21,18 @@ class AddUser extends Component
         $this->modal = false;
     }
 
-    public FormUser $form;
+    public FormRole $role;
 
-    public function save()
+    public function deleteRole($id)
     {
-        $this->form->store();
-        $this->closeModal();
+        $this->role->delete($id);
         
+        $this->closeModal();
         return redirect()->back();
     }
 
     public function render()
     {
-        return view('livewire.admin.actions.add-user');
+        return view('livewire.admin.actions.delete-role');
     }
 }

@@ -18,7 +18,7 @@
                     </th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody wire:loading.class="animate-pulse">
                 @foreach ($this->users as $user)
                 <tr
                     class="bg-white border-b dark:bg-zinc-800 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-600">
@@ -33,11 +33,7 @@
                     </td>
                     <td xc:if="false" class="px-6 py-4">
                         <div class="">
-                            {{-- <button wire:click="editUser({{$user->id}})"
-                                class="text-xs text-zinc-500 dark:text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300">
-                                Edit
-                            </button> --}}
-                            <livewire:admin.actions.delete-user :id="$user->id" />
+                            <livewire:admin.actions.delete-user :user="$user" :key="$user->id" />
                         </div>
                 </tr>
                 @endforeach

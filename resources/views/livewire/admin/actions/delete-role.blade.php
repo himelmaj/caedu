@@ -4,15 +4,15 @@
 
     <x-dialog-modal wire:model="modal">
             <x-slot name="title">
-                Delete User
+                Delete Role
             </x-slot>
 
             <x-slot name="content">
 
-                <form wire:submit="delete({{$user}})" class="flex flex-col gap-4">
+                <form wire:submit="deleteRole({{$id}})" class="flex flex-col gap-4">
     
                     <p class="text-sm text-zinc-600 dark:text-zinc-400">
-                        Are you sure you want to delete this user?
+                        Are you sure you want to delete this role? This action is irreversible.
                     </p>
     
                     <x-danger-button type="submit" wire:loading.attr="disabled">

@@ -7,9 +7,7 @@
                         <h2 class="text-lg font-semibold dark:text-white">{{ $role->name }}</h2>
 
                         <div class="flex gap-2">
-                            <x-danger-button wire:click="deleteRole({{ $role->name }})">
-                                Delete
-                            </x-danger-button>
+                            <livewire:admin.actions.delete-role :id="$role->id" :key="$role->id" />
                         </div>
 
                 </div>

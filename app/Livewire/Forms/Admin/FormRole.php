@@ -7,7 +7,7 @@ use Livewire\Form;
 use Spatie\Permission\Models\Role;
 
 
-class CreateRole extends Form
+class FormRole extends Form
 {
     #[Validate('required|max:255|unique:roles')]
     public string $name = '';
@@ -37,11 +37,12 @@ class CreateRole extends Form
         
     }
 
-    public function delete($name)
+    public function delete($id)
     {
 
-        $role = Role::findOrFail($name);
+        $role = Role::findOrFail($id);
         $role->delete();
+        $this->reset();
     }
 
 

@@ -3,7 +3,7 @@
 namespace App\Livewire\Admin\Actions;
 
 use Livewire\Component;
-use App\Livewire\Forms\Admin\CreateRole;
+use App\Livewire\Forms\Admin\FormRole;
 
 class AddRole extends Component
 {
@@ -19,14 +19,14 @@ class AddRole extends Component
         $this->modal = false;
     }
 
-    public CreateRole $form;
+    public FormRole $form;
 
     public function save()
     {
         $this->form->store();
         $this->closeModal();
 
-        return redirect()->route('admin.roles');
+        return redirect()->back();
     }
 
     public function render()
