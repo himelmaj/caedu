@@ -3,13 +3,11 @@
 namespace App\Livewire\Admin\Actions;
 
 use Livewire\Component;
-use App\Livewire\Forms\Admin\FormUser;
+use App\Livewire\Forms\Admin\CreateRole;
 
-class AddUser extends Component
+class AddRole extends Component
 {
     public $modal = false;
-
-    public $roles =  ['admin', 'teacher', 'student'];
 
     public function openModal()
     {
@@ -21,18 +19,18 @@ class AddUser extends Component
         $this->modal = false;
     }
 
-    public FormUser $form;
+    public CreateRole $form;
 
     public function save()
     {
         $this->form->store();
         $this->closeModal();
-        
-        return redirect()->route('admin.users');
+
+        return redirect()->route('admin.roles');
     }
 
     public function render()
     {
-        return view('livewire.admin.actions.add-user');
+        return view('livewire.admin.actions.add-role');
     }
 }

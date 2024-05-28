@@ -3,6 +3,6 @@
         Roles administration
     </h2>
     
-    {{-- <livewire:admin.actions.add-user /> --}}
+    <livewire:admin.actions.add-role />
 
 </header>

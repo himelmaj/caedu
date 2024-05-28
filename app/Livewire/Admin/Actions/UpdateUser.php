@@ -3,13 +3,12 @@
 namespace App\Livewire\Admin\Actions;
 
 use Livewire\Component;
+use App\Models\User;
 use App\Livewire\Forms\Admin\FormUser;
 
-class AddUser extends Component
+class UpdateUser extends Component
 {
     public $modal = false;
-
-    public $roles =  ['admin', 'teacher', 'student'];
 
     public function openModal()
     {
@@ -21,18 +20,24 @@ class AddUser extends Component
         $this->modal = false;
     }
 
+    public User $user;
+
     public FormUser $form;
 
-    public function save()
+    public function mount(User $user)
     {
-        $this->form->store();
+        $this->user = $user;
+        $this->form->setUser($user);
+    }
+
+    public function updated(){
+        $this->form->update();
         $this->closeModal();
-        
         return redirect()->route('admin.users');
     }
 
     public function render()
     {
-        return view('livewire.admin.actions.add-user');
+        return view('livewire.admin.actions.update-user');
     }
 }

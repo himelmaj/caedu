@@ -16,7 +16,6 @@ class UsersTable extends Component
     use WithPagination; 
 
 
-
     #[Url()]
     public $search = '';
 
@@ -33,6 +32,8 @@ class UsersTable extends Component
             ->orWhere('email', 'like', '%'.$this->search.'%')
             ->paginate(10);
     }
+
+
 
     public function render()
     {

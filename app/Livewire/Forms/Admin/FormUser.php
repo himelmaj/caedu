@@ -7,8 +7,10 @@ use Livewire\Form;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
-class CreateUser extends Form
+class FormUser extends Form
 {
+    public ?User $user;
+
     #[Validate('required|max:255')]
     public string $name = '';
 
@@ -24,6 +26,14 @@ class CreateUser extends Form
     #[Validate('required')]
     public string $password_confirmation = '';
 
+    public function setUser(User $user)
+    {
+        $this->name = $user->name;
+        $this->email = $user->email;
+        $this->password = $user->password;
+        $this->role = $user->getRoleNames()[0];
+    }
+
     public function store()
     {
         $this->validate();
@@ -37,5 +47,37 @@ class CreateUser extends Form
             'email' => $this->email,
             'password' => Hash::make($this->password),
         ])->assignRole($this->role);
+
+        $this->reset();
     }
+
+    public function delete($id)
+    {
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        $this->reset();
+    }
+
+    public function update()
+    {
+        $this->validate();
+
+        if ($this->password !== $this->password_confirmation) {
+            $this->addError('password', 'Passwords do not match.');
+            return;
+        }
+
+        $this->user->update([
+            'name' => $this->name,
+            'email' => $this->email,
+            'password' => Hash::make($this->password),
+        ]);
+
+        $this->user->assignRole($this->role);
+
+        $this->reset();
+    }
+
+
 }

@@ -11,6 +11,9 @@ use Spatie\Permission\Models\Role;
 use Livewire\Attributes\Url;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Computed;
+use App\Livewire\Forms\Admin\CreateRole;
+
+
 
 class RolesList extends Component
 {
@@ -23,6 +26,13 @@ class RolesList extends Component
     public function updateSearch($search)
     {
         $this->search = $search;
+    }
+
+    public CreateRole $form;
+
+    public function deleteRole($name)
+    {
+        $this->form->delete($name);
     }
 
 

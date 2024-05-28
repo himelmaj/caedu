@@ -12,6 +12,10 @@
                     <th scope="col" class="px-6 py-3">
                         Role
                     </th>
+
+                    <th xc:if="false" scope="col" class="px-6 py-3">
+                        Actions
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -27,6 +31,14 @@
                     <td class="px-6 py-4">
                         {{$user->getRoleNames()[0]}}
                     </td>
+                    <td xc:if="false" class="px-6 py-4">
+                        <div class="">
+                            {{-- <button wire:click="editUser({{$user->id}})"
+                                class="text-xs text-zinc-500 dark:text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300">
+                                Edit
+                            </button> --}}
+                            <livewire:admin.actions.delete-user :id="$user->id" />
+                        </div>
                 </tr>
                 @endforeach
 
