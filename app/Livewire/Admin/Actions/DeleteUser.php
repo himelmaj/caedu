@@ -30,7 +30,7 @@ class DeleteUser extends Component
     {
         $this->form->destroy($user);
         $this->closeModal();
-        return redirect(Request::url());
+        return redirect()->route('admin.users');
     }
 
 

@@ -28,7 +28,7 @@ class DeleteRole extends Component
         $this->role->delete($id);
         
         $this->closeModal();
-        return redirect()->back();
+        return redirect()->route('admin.roles');
     }
 
     public function render()

@@ -26,7 +26,7 @@ class AddRole extends Component
         $this->form->store();
         $this->closeModal();
 
-        return redirect()->back();
+        return redirect()->route('admin.roles');
     }
 
     public function render()

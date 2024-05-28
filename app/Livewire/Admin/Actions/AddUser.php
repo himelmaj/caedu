@@ -29,7 +29,7 @@ class AddUser extends Component
         $this->form->store();
         $this->closeModal();
         
-        return redirect(Request::url());
+        return redirect()->route('admin.users');
     }
 
     public function render()
