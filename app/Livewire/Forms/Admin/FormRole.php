@@ -5,6 +5,7 @@ namespace App\Livewire\Forms\Admin;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 use Spatie\Permission\Models\Role;
+use App\Models\User;
 
 
 class FormRole extends Form
@@ -31,18 +32,28 @@ class FormRole extends Form
             ],
             [
                 'name' => $this->name,
-            
+
             ]
         );
-        
+
     }
 
-    public function delete($id)
+    public function destroy(Role $role)
     {
 
-        $role = Role::findOrFail($id);
+        $users = User::with('roles')->whereHas('roles', function($query) use ($role) {
+            $query->where('name', $role->name);
+        })->get();
+    
+        foreach ($users as $user) {
+            $user->removeRole($role);
+            $user->assignRole('unassigned');
+        }
+    
         $role->delete();
+    
         $this->reset();
+        
     }
 
 

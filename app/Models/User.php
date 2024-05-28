@@ -71,6 +71,7 @@ class User extends Authenticatable
             'admin' => 'admin.index',
             'student' => 'student.index',
             'teacher' => 'teacher.index',
+            'unassigned' => 'unassigned.index',
             default => 'login',
         };
     }

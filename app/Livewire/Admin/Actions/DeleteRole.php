@@ -4,12 +4,13 @@ namespace App\Livewire\Admin\Actions;
 
 use Livewire\Component;
 use App\Livewire\Forms\Admin\FormRole;
+use Spatie\Permission\Models\Role;
 
 class DeleteRole extends Component
 {
     public $modal = false;
 
-    public $id;
+    public Role $role;
 
     public function openModal()
     {
@@ -21,12 +22,11 @@ class DeleteRole extends Component
         $this->modal = false;
     }
 
-    public FormRole $role;
+    public FormRole $form;
 
-    public function deleteRole($id)
+    public function delete(Role $role)
     {
-        $this->role->delete($id);
-        
+        $this->form->destroy($role);
         $this->closeModal();
         return redirect()->route('admin.roles');
     }

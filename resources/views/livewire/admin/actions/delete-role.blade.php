@@ -9,7 +9,7 @@
 
             <x-slot name="content">
 
-                <form wire:submit="deleteRole({{$id}})" class="flex flex-col gap-4">
+                <form wire:submit="delete({{$role}})" class="flex flex-col gap-4">
     
                     <p class="text-sm text-zinc-600 dark:text-zinc-400">
                         Are you sure you want to delete this role? This action is irreversible.

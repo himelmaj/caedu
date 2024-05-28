@@ -29,7 +29,7 @@
                         {{$user->email}}
                     </td>
                     <td class="px-6 py-4">
-                        {{$user->getRoleNames()[0]}}
+                        {{$user->getRoleNames()[0] ?? 'Unassigned Role'}}
                     </td>
                     <td xc:if="false" class="px-6 py-4">
                         <div class="">

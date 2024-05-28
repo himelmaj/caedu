@@ -18,7 +18,7 @@ class FormUser extends Form
     public string $email = '';
 
     #[Validate('required')]
-    public string $role = 'student';
+    public string $role = 'unassigned';
 
     #[Validate('required|confirmed')]
     public string $password = '';
