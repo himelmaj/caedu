@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use \App\Models\User;
+
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Appointment>
@@ -21,8 +23,8 @@ class AppointmentFactory extends Factory
             'description' => $this->faker->paragraph,
             'start' => $this->faker->dateTimeBetween('now', '+1 week'),
             'end' => $this->faker->dateTimeBetween('+1 week', '+2 week'),
-            'sender_id' => \App\Models\User::all()->random()->id,
-            'receiver_id' => \App\Models\User::all()->random()->id,
+            'sender_id' => User::all()->random()->id,
+            'receiver_id' => User::all()->random()->id,
         ];
     }
 }

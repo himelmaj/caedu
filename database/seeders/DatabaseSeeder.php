@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
         $admin = User::create([
             'name' => 'Admin',
             'email' => 'admin@example.com',
-            'password' => Hash::make(env('USER_PASSWORD'))
+            'password' => Hash::make(env('USER_PASSWORD') || 'password')
         ]);
 
         $admin->assignRole('admin');
@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
         $teacher = User::create([
             'name' => 'Teacher',
             'email' => 'teacher@example.com',
-            'password' => Hash::make(env('USER_PASSWORD'))
+            'password' => Hash::make(env('USER_PASSWORD') || 'password')
         ]);
 
         $teacher->assignRole('teacher');
@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
         $student = User::create([
             'name' => 'Student',
             'email' => 'student@example.com',
-            'password' => Hash::make(env('USER_PASSWORD'))
+            'password' => Hash::make(env('USER_PASSWORD') || 'password')
         ]);
 
         $student->assignRole('student');
@@ -61,7 +61,6 @@ class DatabaseSeeder extends Seeder
             ->create()
             ->each(fn($user) => $user->assignRole('student'));
 
-        // \App\Models\Appointment::factory()
 
         Appointment::factory()
             ->count(300)
