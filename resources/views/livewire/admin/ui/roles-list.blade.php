@@ -9,7 +9,9 @@
                 <div class="flex gap-2">
                     @if (!auth()->user()->hasRole($role->name) && $role->name !== 'unassigned')
                         <livewire:admin.actions.delete-role :role="$role" :key="$role->id" />
+                        <livewire:admin.actions.update-role :role="$role" :key="$role->id" />
                     @endif
+
                 </div>
 
             </div>

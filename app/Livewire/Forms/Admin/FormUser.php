@@ -14,24 +14,24 @@ class FormUser extends Form
     #[Validate('required|max:255')]
     public string $name = '';
 
-    #[Validate('required|email|unique:users')]
+    #[Validate('required|email|unique:users,email,{this->user->id}')]
     public string $email = '';
 
     #[Validate('required')]
     public string $role = 'unassigned';
 
-    #[Validate('required|confirmed')]
+    #[Validate('nullable|confirmed')]
     public string $password = '';
 
-    #[Validate('required')]
+    #[Validate('nullable')]
     public string $password_confirmation = '';
 
     public function setUser(User $user)
     {
         $this->name = $user->name;
         $this->email = $user->email;
-        $this->password = $user->password;
         $this->role = $user->getRoleNames()[0];
+        $this->user = $user;
     }
 
     public function store()
@@ -42,31 +42,42 @@ class FormUser extends Form
             $this->addError('password', 'Passwords do not match.');
             return;
         }
-        User::create([
-            'name' => $this->name,
-            'email' => $this->email,
-            'password' => Hash::make($this->password),
-        ])->assignRole($this->role);
 
-        $this->reset();
-    }
-
-    public function update()
-    {
-        $this->validate();
-
-        if ($this->password !== $this->password_confirmation) {
-            $this->addError('password', 'Passwords do not match.');
-            return;
-        }
-
-        $this->user->update([
+        $user = User::create([
             'name' => $this->name,
             'email' => $this->email,
             'password' => Hash::make($this->password),
         ]);
 
-        $this->user->assignRole($this->role);
+        $user->assignRole($this->role);
+        $this->reset();
+    }
+
+    public function update()
+    {
+        $this->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|email|unique:users,email,' . $this->user->id,
+            'role' => 'required',
+            'password' => 'nullable|confirmed',
+            'password_confirmation' => 'nullable',
+        ]);
+
+        $data = [
+            'name' => $this->name,
+            'email' => $this->email,
+        ];
+
+        if (!empty($this->password)) {
+            if ($this->password !== $this->password_confirmation) {
+                $this->addError('password', 'Passwords do not match.');
+                return;
+            }
+            $data['password'] = Hash::make($this->password);
+        }
+
+        $this->user->update($data);
+        $this->user->syncRoles([$this->role]);
 
         $this->reset();
     }
@@ -75,5 +86,4 @@ class FormUser extends Form
     {
         $user->delete();
     }
-
 }

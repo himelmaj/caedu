@@ -30,10 +30,10 @@ class UpdateUser extends Component
         $this->form->setUser($user);
     }
 
-    public function updated(){
+    public function updateUser(){
         $this->form->update();
         $this->closeModal();
-        return redirect()->back();
+        return redirect()->route('admin.users');
     }
 
     public function render()

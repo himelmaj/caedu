@@ -21,7 +21,7 @@
             <tbody wire:loading.class="animate-pulse">
                 @foreach ($this->users as $user)
                 <tr
-                    class="bg-white border-b dark:bg-zinc-800 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-600">
+                    class="bg-white border-b dark:bg-zinc-800 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-600" wire:key='{{$user->email}}'>
                     <th scope="row" class="px-6 py-4 font-medium text-zinc-900 whitespace-nowrap dark:text-white">
                         {{$user->name}}
                     </th>
@@ -31,10 +31,10 @@
                     <td class="px-6 py-4">
                         {{$user->getRoleNames()[0] ?? 'Unassigned Role'}}
                     </td>
-                    <td xc:if="false" class="px-6 py-4">
-                        <div class="">
-                            <livewire:admin.actions.delete-user :user="$user" :key="$user->id" />
-                        </div>
+                    <td class="px-6 py-4 flex flex-row gap-2">
+                        <livewire:admin.actions.delete-user :user="$user" />
+                        <livewire:admin.actions.update-user :user="$user" />
+                    </td>
                 </tr>
                 @endforeach
 
