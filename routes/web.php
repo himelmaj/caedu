@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AppointmentController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -12,10 +13,13 @@ Route::middleware(['auth:sanctum',  config('jetstream.auth_session'), 'verified'
         Route::view('/users', 'web.auth.sections.admin.users')->name('admin.users');
         Route::view('/roles', 'web.auth.sections.admin.roles')->name('admin.roles');
         Route::view('/calendar', 'web.auth.sections.admin.calendar')->name('admin.calendar');
-        
 
-        Route::get('/appointments/{id}', 'AppointmentController@getAppointmentsById');
-
+        // Appointments
+        Route::prefix('appointments')->group(function () {
+            Route::get('/{id}', [AppointmentController::class, 'getAppointmentById']);
+            Route::get('/sender/{sender_id}', [AppointmentController::class, 'getAppointmentsBySender']);
+            Route::get('/receiver/{receiver_id}', [AppointmentController::class, 'getAppointmentsByReceiver']);
+        });
 
     });
 
