@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Appointment;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -60,6 +61,11 @@ class DatabaseSeeder extends Seeder
             ->create()
             ->each(fn($user) => $user->assignRole('student'));
 
+        // \App\Models\Appointment::factory()
+
+        Appointment::factory()
+            ->count(300)
+            ->create();
 
     }
 }
