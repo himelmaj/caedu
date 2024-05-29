@@ -12,7 +12,8 @@ class Sidebar extends Component
     public $admin_links = [
         ['label' => 'Home', 'url' => '/admin', 'icon' => 'heroicon-s-home'],
         ['label' => 'Users', 'url' => '/admin/users', 'icon' => 'heroicon-s-users'],
-        ['label' => 'Roles', 'url' => '/admin/roles', 'icon' => 'heroicon-s-user-group']
+        ['label' => 'Roles', 'url' => '/admin/roles', 'icon' => 'heroicon-s-user-group'],
+        ['label' => 'Calendar', 'url' => '/admin/calendar', 'icon' => 'heroicon-s-calendar']
     ];
 
     #[Computed]
