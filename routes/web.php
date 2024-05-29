@@ -16,9 +16,11 @@ Route::middleware(['auth:sanctum',  config('jetstream.auth_session'), 'verified'
 
         // Appointments
         Route::prefix('appointments')->group(function () {
+            Route::post('/', [AppointmentController::class, 'store']);
             Route::get('/{id}', [AppointmentController::class, 'getAppointmentById']);
             Route::get('/sender/{sender_id}', [AppointmentController::class, 'getAppointmentsBySender']);
             Route::get('/receiver/{receiver_id}', [AppointmentController::class, 'getAppointmentsByReceiver']);
+            Route::get('/search/users', [AppointmentController::class, 'searchUsers']);
         });
 
     });

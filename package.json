@@ -23,6 +23,8 @@
         "@fullcalendar/interaction": "^6.1.13",
         "@fullcalendar/react": "^6.1.13",
         "@fullcalendar/timegrid": "^6.1.13",
+        "dayjs": "^1.11.11",
+        "react-hook-form": "^7.51.5",
         "react-router-dom": "^6.23.1",
         "sonner": "^1.4.41"
     }

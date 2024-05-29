@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Appointment;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class AppointmentController extends Controller
 {
@@ -28,7 +29,18 @@ class AppointmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|string',
+            'description' => 'nullable|string',
+            'start' => 'required|date',
+            'end' => 'required|date',
+            'sender_id' => 'required|exists:users,id',
+            'receiver_id' => 'required|exists:users,id',
+        ]);
+
+        $appointment = Appointment::create($request->all());
+
+        return response()->json($appointment);
     }
 
     /**
@@ -79,5 +91,17 @@ class AppointmentController extends Controller
     {
         $appointments = Appointment::where('receiver_id', $receiver_id)->get();
         return response()->json($appointments);
+    }
+
+
+    public function searchUsers(Request $request)
+    {
+        $search = $request->input('search');
+
+        $users = User::where('name', 'like', "%$search%")
+            ->orWhere('email', 'like', "%$search%")
+            ->paginate(10);
+
+        return response()->json($users);
     }
 }
