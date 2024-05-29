@@ -1,29 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
-import interactionPlugin from "@fullcalendar/interaction" 
+import interactionPlugin from "@fullcalendar/interaction";
 
-const StudentCalendar = () => {
+const StudentCalendar = (props) => {
+    const [events, setEvents] = useState([]);
+    const { data } = props;
 
+    useEffect(() => {
+        const fetchData = async () => {
+            await axios
+                .get(`/student/appointments/receiver/${data.id}`)
+                .then((response) => {
+                    setEvents(response.data);
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        };
+        fetchData();
+    }, []);
 
-
-    const handleDateClick = (arg) => {
-        alert(arg.dateStr)
-      }
     return (
-        <FullCalendar
-        plugins={[ dayGridPlugin, interactionPlugin ]}
-        dateClick={handleDateClick}
-        initialView="dayGridMonth"
-        initialEvents={
-          [
-            { title: "event 1", date: new Date() },
-            { title: "event 2", date: new Date() }
-          ]
-        }
-        // eventColor="#3788D8"
-      />
+        <section className="bg-zinc-800 p-2 rounded-lg ">
+            <FullCalendar
+                plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
+                initialView={"timeGridWeek"}
+                headerToolbar={{
+                    left: "prev,next today",
+                    center: "title",
+                    right: "dayGridMonth,timeGridWeek,timeGridDay",
+                }}
+                allDaySlot={false}
+                selectable={true}
+                eventColor="#3788d8"
+                events={events}
+            />
+        </section>
     );
 };
 

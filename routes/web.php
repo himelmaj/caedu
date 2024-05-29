@@ -32,6 +32,12 @@ Route::middleware(['auth:sanctum',  config('jetstream.auth_session'), 'verified'
     Route::middleware(['role:student'])->prefix('student')->group(function () {
         Route::view('/', 'web.auth.sections.student.index')->name('student.index');
         Route::view('/calendar', 'web.auth.sections.student.calendar')->name('student.calendar');
+
+        // Appointments
+        Route::prefix('appointments')->group(function () {
+            Route::get('/receiver/{receiver_id}', [AppointmentController::class, 'getAppointmentsByReceiver']);
+
+        });
     });
 
 
