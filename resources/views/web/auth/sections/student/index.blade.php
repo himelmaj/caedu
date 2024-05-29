@@ -1,5 +1,3 @@
 <x-layouts.app>
-    <section id="react-root">
-
-    </section>
+student
 </x-layouts.app>

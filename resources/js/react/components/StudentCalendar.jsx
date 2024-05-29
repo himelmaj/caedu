@@ -1,10 +1,13 @@
 import React from "react";
 
 import FullCalendar from "@fullcalendar/react";
-import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
-import interactionPlugin from "@fullcalendar/interaction" // needed for dayClick
+import dayGridPlugin from "@fullcalendar/daygrid";
+import interactionPlugin from "@fullcalendar/interaction" 
 
 const StudentCalendar = () => {
+
+
+
     const handleDateClick = (arg) => {
         alert(arg.dateStr)
       }
@@ -12,6 +15,14 @@ const StudentCalendar = () => {
         <FullCalendar
         plugins={[ dayGridPlugin, interactionPlugin ]}
         dateClick={handleDateClick}
+        initialView="dayGridMonth"
+        initialEvents={
+          [
+            { title: "event 1", date: new Date() },
+            { title: "event 2", date: new Date() }
+          ]
+        }
+        // eventColor="#3788D8"
       />
     );
 };

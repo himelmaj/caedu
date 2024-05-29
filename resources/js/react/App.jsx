@@ -1,24 +1,19 @@
-import { useState } from 'react'
-import React from 'react'
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import StudentCalendar from "./components/StudentCalendar";
+import AdminCalendar from "./components/AdminCalendar";
 
+import React from "react";
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    return (
+        <BrowserRouter>
+            <div className="container mx-auto">
+                <Routes>
+                    <Route path="/student/calendar" element={<StudentCalendar />}></Route>
+                    <Route path="/admin/calendar" element={<AdminCalendar />}></Route>
+                </Routes>
+            </div>
+        </BrowserRouter>
+    );
 }
 
-export default App
+export default App;

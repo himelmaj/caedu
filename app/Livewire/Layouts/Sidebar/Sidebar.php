@@ -23,6 +23,7 @@ class Sidebar extends Component
     #[Computed]
     public $student_links = [
         ['label' => 'Home', 'url' => '/student', 'icon' => 'heroicon-s-home'],
+        ['label' => 'Calendar', 'url' => '/student/calendar', 'icon' => 'heroicon-s-calendar']
     ];
 
     public function render()
