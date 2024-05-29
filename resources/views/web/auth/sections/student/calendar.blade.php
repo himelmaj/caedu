@@ -1,5 +1,5 @@
 <x-layouts.app>
-    <section id="react-root">
+    <section id="react-root" data={{auth()->user()}}>
 
     </section>
 </x-layouts.app>
