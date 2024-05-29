@@ -17,8 +17,8 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->dateTime('start');
             $table->dateTime('end');
-            $table->foreignIdFor(\App\Models\User::class, 'sender_id')->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(\App\Models\User::class, 'receiver_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('sender_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('receiver_id')->constrained('users')->cascadeOnDelete();
             $table->timestamps();
         });
     }
