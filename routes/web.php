@@ -11,6 +11,7 @@ Route::middleware(['auth:sanctum',  config('jetstream.auth_session'), 'verified'
         Route::view('/', 'web.auth.sections.admin.index')->name('admin.index');
         Route::view('/users', 'web.auth.sections.admin.users')->name('admin.users');
         Route::view('/roles', 'web.auth.sections.admin.roles')->name('admin.roles');
+        Route::view('/calendar', 'web.auth.sections.admin.calendar')->name('admin.calendar');
 
     });
 
