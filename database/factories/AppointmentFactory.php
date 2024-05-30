@@ -21,8 +21,8 @@ class AppointmentFactory extends Factory
         return [
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
-            'start' => $this->faker->dateTimeBetween('now', '+1 week'),
-            'end' => $this->faker->dateTimeBetween('+1 week', '+2 week'),
+            'start' => $this->faker->dateTimeBetween('now', '+8 hours'),
+            'end' => $this->faker->dateTimeBetween('+8 hours', '+16 hours'),
             'sender_id' => User::all()->random()->id,
             'receiver_id' => User::all()->random()->id,
         ];
